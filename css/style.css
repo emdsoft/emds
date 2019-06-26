@@ -1,0 +1,122 @@
+html {
+
+  box-sizing: border-box;
+
+  text-rendering: optimizeLegibility;
+
+}
+
+*,
+
+*:before,
+
+*:after {
+
+  box-sizing: inherit;
+
+}
+
+.cf:before,
+
+.cf:after {
+
+  content: " ";
+
+  display: table;
+
+}
+
+.cf:after {
+
+  clear: both;
+
+}
+
+.cf {
+
+  *zoom: 1;
+
+}
+
+body {
+
+  margin: 0;
+
+  background-color: #e6e9ed;
+
+  font-family: "Lato", sans-serif;
+
+}
+
+header {
+
+  background-color: #254d86;
+
+}
+
+header h1,
+
+header a {
+
+  padding: 15px;
+
+  color: #fff;
+
+  text-transform: uppercase;
+
+  font-size: 12px;
+
+}
+
+header h1 {
+
+  float: left;
+
+  margin: 0;
+
+}
+
+header a {
+
+  padding-left: 20px;
+
+  padding-right: 20px;
+
+  text-decoration: none;
+
+  float: right;
+
+  background-color: #1a365e;
+
+}
+
+header a:hover {
+
+  background-color: #1f4272;
+
+}
+
+.container {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 1000px;
+
+  background: #0096D5;
+
+  background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+
+}
+
+.container svg {
+
+position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
