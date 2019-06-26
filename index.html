@@ -14,6 +14,8 @@
 
 </head>
 
+
+
 <body>
 
 
@@ -22,7 +24,7 @@
 
 		<h1>ЕМДСофт</h1>
 
-		<a href="">Контакты</a>
+		<a id="switch" href="#">Контакты</a>
 
 	</header>
 
@@ -32,11 +34,11 @@
 
 
 
-		<svg width="160mm" height="160mm" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+		<svg width="160mm" height="160mm" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" class="emds">
 
 
-    <defs>
-        <filter id="a" x="-.276" width="1.553" y="-.276" height="1.551" color-interpolation-filters="sRGB">
+    <defs id="defs01">
+        <filter id="cool" x="-.276" width="1.553" y="-.276" height="1.551" color-interpolation-filters="sRGB">
             <feGaussianBlur stdDeviation="1.855"/>
         </filter>
     </defs>
@@ -50,7 +52,7 @@
         </g>
         <path d="M-53.15 67.14c.604.137.113.882-.228 1.004-.925.331-1.71-.626-1.781-1.46-.127-1.494 1.302-2.578 2.694-2.558 2.042.03 3.46 1.984 3.333 3.927-.17 2.59-2.668 4.352-5.16 4.11-3.135-.305-5.245-3.353-4.885-6.393.435-3.682 4.037-6.141 7.625-5.662 4.23.565 7.038 4.722 6.438 8.858-.692 4.776-5.407 7.936-10.09 7.215-5.323-.82-8.835-6.092-7.992-11.324.947-5.87 6.747-9.408 12.564-8.7 7.112.864 12.034 12.995 5.505 17.702" transform="matrix(2.77176 1.64675 -1.64373 2.77684 336.996 80.702)" fill="none" stroke="#000" stroke-width="1.165"/>
         <path d="M15.379 176.775c71.286 79.912 129.562-.443 133.308 1.049M15.379 180.581c71.286-79.912 129.562.443 133.308-1.049" fill="none" stroke="#000" stroke-width="4.977"/>
-        <ellipse cx="80.444" cy="177.4" rx="8.056" ry="8.071" transform="matrix(1.47282 0 0 1.28463 -37.47 -50.494)" fill="red" filter="url(#a)"/>
+        <ellipse cx="80.444" cy="177.4" rx="8.056" ry="8.071" transform="matrix(1.47282 0 0 1.28463 -37.47 -50.494)" fill="red" filter="url(#cool)"/>
     </g>
 		   
 
@@ -61,6 +63,128 @@
 
 
 
+ <script type="text/javascript">
+/*var filters = document.querySelector(".emds"),
+    defs = filters.querySelector("#defs01"),
+*/
+var    blur = document.querySelector("#cool"),
+    start = null,
+    animationActive = false,
+    animDuration = null,
+    blurFilter = blur.firstElementChild;
+
+    function setBlur(fill) {
+	blur.setAttribute("x", fill.x);
+	blur.setAttribute("y", fill.y);
+	blur.setAttribute("width", fill.w);
+	blur.setAttribute("height", fill.h);
+
+    	blurFilter.setAttribute("stdDeviation", fill.dev);
+    }
+
+    function microtime(get_as_float) {
+     var now = new Date().getTime() / 1000;
+     var s = parseInt(now, 10);
+     return (get_as_float) ? now : (Math.round((now - s) * 1000) / 1000) + ' ' + s;
+    }
+
+    function stepMotionBlur(duration) {
+    	if (!animDuration)
+      	animDuration = duration;
+      if (!start)
+      	start = microtime(true);
+      var nowTime = microtime(true);
+      var progress = nowTime - start;
+      var percProgress = progress * 100 / animDuration * 10;
+
+      if (percProgress > .8) {
+      	setBlur({x:"-.008", w:"1.017",y:"-.008", h:"1.017", dev:"0.057"});
+    var blur = document.querySelector("#cool");
+    console.log("update 1");
+
+    console.log(blur.getAttribute("x"));
+    console.log(blur.getAttribute("y"));
+    console.log(blur.getAttribute("width"));
+    console.log(blur.getAttribute("height"));
+    blurFilter = blur.firstElementChild;
+    console.log(blurFilter.getAttribute("stdDeviation"));
+
+      } else {
+     	setBlur({x:"-.008", w:"1.017",y:"-.008", h:"1.017", dev:"0.057"});
+    var blur = document.querySelector("#cool");
+    console.log("update 2");
+
+    console.log(blur.getAttribute("x"));
+    console.log(blur.getAttribute("y"));
+    console.log(blur.getAttribute("width"));
+    console.log(blur.getAttribute("height"));
+    blurFilter = blur.firstElementChild;
+    console.log(blurFilter.getAttribute("stdDeviation"));
+
+      }
+      if (percProgress >= 1) {
+      	setBlur({x:"-.276", w:"1.553",y:"-.276", h:"1.551", dev:"1.855"});
+        start = null;
+        animationActive = false;
+        return;
+      }
+      requestAnimationFrame(stepMotionBlur);
+   }
+
+window.onload = function () {
+
+    var blur = document.querySelector("#cool");
+
+    console.log(blur.getAttribute("x"));
+    console.log(blur.getAttribute("y"));
+    console.log(blur.getAttribute("width"));
+    console.log(blur.getAttribute("height"));
+    blurFilter = blur.firstElementChild;
+    console.log(blurFilter.getAttribute("stdDeviation"));
+
+    //получаем идентификатор элемента
+    var a = document.getElementById('switch');
+    
+    //вешаем на него событие
+    a.onclick = function() {
+        //производим какие-то действия
+        if (this.innerHTML=='On'){
+      	setBlur({x:"-.276", w:"1.553",y:"-.276", h:"1.551", dev:"1.855"});
+
+ this.innerHTML = 'Off';
+}
+        else {
+     	setBlur({x:"-.008", w:"1.017",y:"-.008", h:"1.017", dev:"0.057"});
+
+this.innerHTML = 'On';   }
+  	if (!animationActive) {
+    		animationActive = true;
+//    	  $(this).next().toggleClass('animate');
+    var blur = document.querySelector("#cool");
+
+    console.log(blur.getAttribute("x"));
+    console.log(blur.getAttribute("y"));
+    console.log(blur.getAttribute("width"));
+    console.log(blur.getAttribute("height"));
+    blurFilter = blur.firstElementChild;
+    console.log(blurFilter.getAttribute("stdDeviation"));
+
+     //	 stepMotionBlur(300);
+    	}
+    var blur = document.querySelector("#cool");
+
+    console.log(blur.getAttribute("x"));
+    console.log(blur.getAttribute("y"));
+    console.log(blur.getAttribute("width"));
+    console.log(blur.getAttribute("height"));
+    blurFilter = blur.firstElementChild;
+    console.log(blurFilter.getAttribute("stdDeviation"));
+
+        //предотвращаем переход по ссылке href
+        return false;
+    }
+}
+</script>
 
 
 

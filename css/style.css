@@ -120,3 +120,27 @@ position: absolute;
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }
+
+#cool {
+
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes slidein {
+  from {
+    x:"-.276";
+    width:"1.553";
+    y:"-.276";
+    height:"1.551"
+  }
+
+  to {
+    x:"-.008";
+    width:"1.017";
+    y:"-.008";
+    height:"1.017"
+  }
+}
